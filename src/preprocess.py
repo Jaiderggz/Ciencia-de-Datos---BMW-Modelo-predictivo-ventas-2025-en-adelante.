@@ -2,7 +2,7 @@ import argparse
 import pandas as pd
 
 def preprocess(input_path, output_path):
-    # Detectar CSV o Excel
+    # Detectar dataset
     if input_path.endswith(".csv"):
         df = pd.read_csv(input_path)
     else:
@@ -11,7 +11,7 @@ def preprocess(input_path, output_path):
     print("Dataset cargado. Filas y columnas:", df.shape)
     print(df.head())
 
-    # --- Limpieza básica ---
+    # limpieza simple 
     
     df = df.drop_duplicates()
     df = df.fillna(df.mean(numeric_only=True))
@@ -19,7 +19,7 @@ def preprocess(input_path, output_path):
     df = df.drop(columns=["Sales_Volume"])
 
 
-    # Guardar dataset procesado
+    # guardar dataset limpio 
     df.to_csv(output_path, index=False)
     print("Procesado guardado en:", output_path)
 
